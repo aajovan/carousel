@@ -100,7 +100,8 @@ label {
       color: #fff;
       transition: all 0.5s; }
       .carousel__actions button:hover {
-        background-color: #383b59; }
+        background-color: #383b59;
+        cursor: pointer; }
 
 .carousel__options__box {
   display: flex;
@@ -126,8 +127,13 @@ label {
     width: 10px;
     flex: 1;
     opacity: 0.7; }
+    .carousel__nav-img:hover {
+      cursor: pointer;
+      opacity: 0.9; }
   .carousel__nav-active {
     opacity: 1; }
+    .carousel__nav-active:hover {
+      opacity: 1; }
 
 .hidden {
   display: none; }
