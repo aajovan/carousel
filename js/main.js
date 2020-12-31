@@ -1,7 +1,7 @@
-const prevButton = document.getElementById("carousel-button-prev");
-const nextButton = document.getElementById("carousel-button-next");
-const slideNav = document.getElementById("carousel-slide-nav");
-const slides = document.querySelectorAll(".carousel-item");
+const prevButton = document.getElementById("carousel__button-prev");
+const nextButton = document.getElementById("carousel__button-next");
+const slideNav = document.getElementById("carousel__nav");
+const slides = document.querySelectorAll(".carousel__item");
 const totalSlides = slides.length;
 let slidePos = 0;
 let navigation = slideNav.childNodes;
@@ -22,8 +22,8 @@ function nextSlide() {
   } else {
     slidePos++;
   }
-  displaySlide(slides, "carousel-item-visible");
-  displaySlide(navigation, "nav-current");
+  displaySlide(slides, "carousel__item-visible");
+  displaySlide(navigation, "carousel__nav-active");
 }
 
 function prevSlide() {
@@ -32,23 +32,23 @@ function prevSlide() {
   } else {
     slidePos--;
   }
-  displaySlide(slides, "carousel-item-visible");
-  displaySlide(navigation, "nav-current");
+  displaySlide(slides, "carousel__item-visible");
+  displaySlide(navigation, "carousel__nav-active");
 }
 
 function slideNavigation() {
   for (let slide = 0; slide < totalSlides; slide++) {
     let imgNavigation = document.createElement("img");
-    imgNavigation.classList.add("carouselNav-img");
+    imgNavigation.classList.add("carousel__nav-img");
     imgNavigation.setAttribute('src', Array.from(slides)[slide].querySelectorAll("img")[0].src);
     if (slide === slidePos) {
-      imgNavigation.classList.add("nav-current");
+      imgNavigation.classList.add("carousel__nav-active");
     }
     slideNav.append(imgNavigation);
     imgNavigation.addEventListener("click", function () {
       slidePos = slide;
-      displaySlide(slides, "carousel-item-visible");
-      displaySlide(navigation, "nav-current");
+      displaySlide(slides, "carousel__item-visible");
+      displaySlide(navigation, "carousel__nav-active");
     });
   }
 }
