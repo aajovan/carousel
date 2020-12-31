@@ -67,6 +67,11 @@ $('input[name="autoplay"]').on('click', function (e) {
 
 });
 
+$('input[name="toggleNav"]').on('click', function (e) {
+$('.carousel__nav').toggleClass('hidden');
+
+});
+
 $('[popup-open]').on('click', function () {
   var popup_name = $(this).attr('popup-open');
   $('[popup-name="' + popup_name + '"]').fadeIn(300);

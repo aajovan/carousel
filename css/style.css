@@ -109,6 +109,14 @@ label {
   margin: 5px;
   min-height: 34px; }
 
+.carousel__options__header {
+  box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  color: #23274a; }
+
+.carousel__options__container {
+  padding: 10px; }
+
 .carousel__nav {
   width: 100%;
   display: flex;
@@ -120,6 +128,9 @@ label {
     opacity: 0.7; }
   .carousel__nav-active {
     opacity: 1; }
+
+.hidden {
+  display: none; }
 
 .popup {
   z-index: 2;
@@ -160,7 +171,6 @@ label {
     width: 700px;
     margin: 0 auto;
     box-sizing: border-box;
-    padding: 40px;
     margin-top: 100px;
     box-shadow: 0px 2px 6px black;
     border-radius: 3px;

@@ -6,4 +6,12 @@
         margin: 5px;
         min-height: 34px;
     }
+    &__header {
+        box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.2);
+        padding: 15px;
+        color: $color-primary;
+    }
+    &__container {
+        padding: 10px;
+    }
 }

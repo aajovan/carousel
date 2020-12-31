@@ -12,17 +12,27 @@
 
 <body>
     <div class="container">
-            <div class="popup" popup-name="popup-1">
-                <div class="popup__content">
+        <div class="popup" popup-name="popup-1">
+            <div class="popup__content">
+                    <div class="carousel__options__header">
+                        <h1>Settings</h1>
+                    </div>
+                    <div class="carousel__options__container">
                     <div class="carousel__options__box">
                         <label for="autoplay">Autoplay</label>
                         <input type="checkbox" id="autoplay" name="autoplay" value="false" class="switch">
                     </div>
-            <a class="popup__btn-close" popup-close="popup-1" href="javascript:void(0)">x</a>
+                    <div class="carousel__options__box">
+                        <label for="toggleNav">Hide navigation</label>
+                        <input type="checkbox" id="toggleNav" name="toggleNav" value="false" class="switch">
+                    </div>
                 </div>
-            </div>  
+                <a class="popup__btn-close" popup-close="popup-1" href="javascript:void(0)">x</a>
+            </div>
+        </div>
         <div class="carousel">
-            <a class="popup__btn-open" popup-open="popup-1" href="javascript:void(0)"><img src="img/settings.svg" alt=""></a>
+            <a class="popup__btn-open" popup-open="popup-1" href="javascript:void(0)"><img src="img/settings.svg"
+                    alt=""></a>
             <div class="carousel__item carousel__item-visible">
                 <img src="https://w.wallhaven.cc/full/rd/wallhaven-rd7drw.jpg" alt="">
             </div>
@@ -37,8 +47,7 @@
             </div>
             <div class="carousel__actions">
                 <button id="carousel__button-prev" aria-label="Previous slide"><</button>
-                        
-                        <button id="carousel__button-next" aria-label="Previous slide">></button>
+                <button id="carousel__button-next" aria-label="Previous slide">></button>
             </div>
         </div>
         <div class="carousel__nav" id="carousel__nav"></div>
