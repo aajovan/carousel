@@ -51,20 +51,20 @@ $(document).ready(function () {
   }
 
   function slideNavigation() {
-    for (let slide = 0; slide < totalSlides; slide++) {
+    $('.carousel__item').each(function(slide) {
       var imgNavigation = document.createElement("img");
       imgNavigation.classList.add("carousel__nav-img");
-      imgNavigation.setAttribute('src', Array.from(slides)[slide].querySelectorAll("img")[0].src);
+      imgNavigation.setAttribute('src', $(this).find('img').attr('src'));
       if (slide === slidePos) {
         imgNavigation.classList.add("carousel__nav-active");
       }
-      slideNav.append(imgNavigation);
+      $('.carousel__nav').append(imgNavigation);
       imgNavigation.addEventListener("click", function () {
         slidePos = slide;
         displaySlide(slides, "carousel__item-visible");
         displaySlide(navigation, "carousel__nav-active");
       });
-    }
+    })
   }
 
   prevButton.addEventListener("click", prevSlide);
@@ -85,7 +85,7 @@ $(document).ready(function () {
   }
 
   var toggleAutoplay = function (input, inputNum, configItem, isCurrent) {
-    var autoplayNum = Number.parseInt($(inputNum).val());
+    var autoplayNum = Number($(inputNum).val());
     if (($(input).prop("checked") === true) && autoplayNum) {
       if (isCurrent) {
         clearInterval(intervalAutoplay);
