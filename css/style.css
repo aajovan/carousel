@@ -145,6 +145,9 @@ label {
     width: 10px;
     flex: 1;
     opacity: 0.7; }
+    @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+      .carousel__nav-img {
+        min-height: 150px; } }
     .carousel__nav-img:hover {
       cursor: pointer;
       opacity: 0.9; }
