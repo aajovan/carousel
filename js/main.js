@@ -10,6 +10,7 @@ var globalUI = {
   autoplay_dt: 'input[name="autoplay-dt"]',
   autoplayNum_mb: 'input[name="autoplayNum-mb"]',
   autoplayNum_dt: 'input[name="autoplayNum-dt"]',
+  carousel: '.carousel',
   carouselNav: ".carousel__nav",
   carouselItem: ".carousel__item",
   carouselNavImg: ".carousel__nav-img",
@@ -213,3 +214,45 @@ function checkIsMobile() {
   }
 }
 
+//add swipe gestures
+
+$(globalUI.carousel).on("touchstart", startTouch);
+$(globalUI.carousel).on("touchmove", moveTouch);
+
+var initialX = null;
+var initialY = null;
+
+function startTouch(e) {
+  initialX = e.touches[0].clientX;
+  initialY = e.touches[0].clientY;
+};
+
+function moveTouch(e) {
+  if (initialX === null) {
+    return;
+  }
+
+  if (initialY === null) {
+    return;
+  }
+
+  var currentX = e.touches[0].clientX;
+  var currentY = e.touches[0].clientY;
+
+  var diffX = initialX - currentX;
+  var diffY = initialY - currentY;
+
+  if (Math.abs(diffX) > Math.abs(diffY)) {
+
+    if (diffX > 0) {
+      prevSlide()
+    } else {
+      nextSlide();
+    }
+  }
+
+  initialX = null;
+  initialY = null;
+
+  e.preventDefault();
+};
