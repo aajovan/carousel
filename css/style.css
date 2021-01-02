@@ -106,17 +106,34 @@ label {
 .carousel__options__box {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: space-between;
   margin: 5px;
   min-height: 34px; }
 
 .carousel__options__header {
   box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.2);
-  padding: 15px;
-  color: #23274a; }
+  color: #23274a;
+  padding: 15px; }
 
 .carousel__options__container {
   padding: 10px; }
+  .carousel__options__container input[type="number"] {
+    border: 1px solid #d3d3d3;
+    border-radius: 50px;
+    max-width: 100px;
+    text-align: center; }
+
+.carousel__options-save {
+  background-color: #23274a;
+  border-radius: 50px;
+  color: #fff;
+  font-size: 19px;
+  line-height: 21px;
+  padding: 5px 15px;
+  text-decoration: none; }
+  .carousel__options-save:hover {
+    background-color: #383b59;
+    cursor: pointer; }
 
 .carousel__nav {
   width: 100%;
@@ -173,6 +190,9 @@ label {
     text-decoration: none;
     top: -10px;
     width: 30px; }
+    .popup__btn-close:hover {
+      background-color: #383b59;
+      cursor: pointer; }
   .popup__content {
     background: #fff;
     border-radius: 3px;
@@ -181,7 +201,7 @@ label {
     margin: 0 auto;
     margin-top: 100px;
     position: relative;
-    width: 700px; }
+    width: 500px; }
     @media screen and (max-width: 1024px) {
       .popup__content {
         width: 90%; } }

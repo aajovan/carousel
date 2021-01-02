@@ -14,17 +14,40 @@
     <div class="container">
         <div class="popup" popup-name="popup-1">
             <div class="popup__content">
-                    <div class="carousel__options__header">
-                        <h1>Settings</h1>
-                    </div>
-                    <div class="carousel__options__container">
+                <div class="carousel__options__header">
+                    <h1>Postavke</h1>
+                </div>
+                <div class="carousel__options__container">
+                    <h2>Desktop</h2>
                     <div class="carousel__options__box">
-                        <label for="autoplay">Autoplay</label>
-                        <input type="checkbox" id="autoplay" name="autoplay" value="false" class="switch">
+                        <label for="autoplay-dt">Autoplay</label>
+                        <input type="checkbox" id="autoplay-dt" name="autoplay-dt" value="false" class="switch" />
                     </div>
                     <div class="carousel__options__box">
-                        <label for="toggleNav">Hide navigation</label>
-                        <input type="checkbox" id="toggleNav" name="toggleNav" value="false" class="switch">
+                        <input type="number" id="autoplayNum-dt" name="autoplayNum-dt" min="1" placeholder="2000ms" />
+                    </div>
+                    <div class="carousel__options__box">
+                        <label for="toggleNav-dt">Sakrij navigaciju</label>
+                        <input type="checkbox" id="toggleNav-dt" name="toggleNav-dt" value="false" class="switch" />
+                    </div>
+                </div>
+                <div class="carousel__options__container">
+                    <h2>Mobile</h2>
+                    <div class="carousel__options__box">
+                        <label for="autoplay-mb">Autoplay</label>
+                        <input type="checkbox" id="autoplay-mb" name="autoplay-mb" value="false" class="switch">
+                    </div>
+                    <div class="carousel__options__box">
+                        <input type="number" id="autoplayNum-mb" name="autoplayNum-mb" min="1" placeholder="2000ms" />
+                    </div>
+                    <div class="carousel__options__box">
+                        <label for="toggleNav-mb">Sakrij navigaciju</label>
+                        <input type="checkbox" id="toggleNav-mb" name="toggleNav-mb" value="false" class="switch">
+                    </div>
+                </div>
+                <div class="carousel__options__container">
+                    <div class="carousel__options__box">
+                        <a class="carousel__options-save" id="saveBtn" href="javascript:void(0)">Spremi</a>
                     </div>
                 </div>
                 <a class="popup__btn-close" popup-close="popup-1" href="javascript:void(0)">x</a>
@@ -46,8 +69,8 @@
                 <img src="https://w.wallhaven.cc/full/9m/wallhaven-9m56vd.jpg" alt="">
             </div>
             <div class="carousel__actions">
-                <button id="carousel__button-prev" aria-label="Previous slide"><</button>
-                <button id="carousel__button-next" aria-label="Previous slide">></button>
+                <button id="carousel__button-prev" aria-label="Previous slide">&#8249;</button>
+                <button id="carousel__button-next" aria-label="Previous slide">&#8250;</button>
             </div>
         </div>
         <div class="carousel__nav" id="carousel__nav"></div>
