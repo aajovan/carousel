@@ -1,34 +1,106 @@
 
 $(document).ready(function () {
-  const prevButton = document.getElementById("carousel__button-prev");
-  const nextButton = document.getElementById("carousel__button-next");
-  const slideNav = document.getElementById("carousel__nav");
-  const slides = document.querySelectorAll(".carousel__item");
-  const totalSlides = slides.length;
-  var slidePos = 0;
-  var navigation = slideNav.childNodes;
-  var intervalAutoplay = null;
+
+  var globalUI = {
+    popup: '#popup',
+    popupBtnOpen: '.popup__btn-open',
+    popupBtnClose: '.popup__btn-close',
+    toggleNav_mb: 'input[name="toggleNav-mb"]',
+    toggleNav_dt: 'input[name="toggleNav-dt"]',
+    autoplay_mb: 'input[name="autoplay-mb"]',
+    autoplay_dt: 'input[name="autoplay-dt"]',
+    autoplayNum_mb: 'input[name="autoplayNum-mb"]',
+    autoplayNum_dt: 'input[name="autoplayNum-dt"]',
+    carouselNav: '.carousel__nav',
+    carouselItem: '.carousel__item',
+    carouselNavImg: '.carousel__nav-img',
+    carouselNavActive: 'carousel__nav-active',
+    carouselItemActive: 'carousel__item-visible',
+    buttonSave: '#saveBtn',
+    prevBtn: '#carousel__button-prev',
+    nextBtn: '#carousel__button-next',
+  }
 
   var mbConfig = {
     autoplay: false,
     hideNav: false,
     time: 0
   }
+
   var dtConfig = {
     autoplay: false,
     hideNav: false,
     time: 0
   }
 
+  var totalSlides = $(globalUI.carouselItem).length;
+  var slidePos = 0;
+  var intervalAutoplay = null;
+
+  // init, apply default config
+
   slideNavigation();
+  checkIsMobile();
+  window.onresize = checkIsMobile;
+
+  // setup next, prev btns
+
+  $(globalUI.prevBtn).on('click', prevSlide)
+  $(globalUI.nextBtn).on('click', nextSlide)
+
+  // setup settings popup
+
+  $(globalUI.popupBtnOpen).on('click', function () {
+    $(globalUI.popup).fadeIn(300);
+    loadSettings();
+  });
+
+  $(globalUI.popupBtnClose).on('click', function () {
+    $(globalUI.popup).fadeOut(300);
+  });
+
+  // setup save btn
+
+  $(globalUI.buttonSave).on('click', function () {
+    checkIsMobile();
+  });
+
+  // main function, setup carousel and carousel nav
+
+  function slideNavigation() {
+    $(globalUI.carouselItem).each(function (slide) {
+      var imgNavigation = document.createElement("img");
+      imgNavigation.classList.add("carousel__nav-img");
+      imgNavigation.setAttribute('src', $(this).find('img').attr('src'));
+      if (slide === slidePos) {
+        imgNavigation.classList.add(globalUI.carouselNavActive);
+      }
+      $(globalUI.carouselNav).append(imgNavigation);
+      imgNavigation.addEventListener("click", function () {
+        slidePos = slide;
+        displayActiveSlide();
+      });
+    })
+  }
+
+  // helper function - sets active carousel and nav item
+
+  function displayActiveSlide() {
+    displaySlide(globalUI.carouselItem, globalUI.carouselItemActive);
+    displaySlide(globalUI.carouselNavImg, globalUI.carouselNavActive);
+  }
+
+  // set active item
 
   function displaySlide(element, className) {
-    for (var item = 0; item < totalSlides; item++) {
+    $(element).each(function (item) {
       item === slidePos
-        ? element[item].classList.add(className)
-        : element[item].classList.remove(className);
-    }
+        ? $(this).addClass(className)
+        : $(this).removeClass(className)
+    })
   }
+
+  // go to next slide function
 
   function nextSlide() {
     if (slidePos === totalSlides - 1) {
@@ -36,9 +108,10 @@ $(document).ready(function () {
     } else {
       slidePos++;
     }
-    displaySlide(slides, "carousel__item-visible");
-    displaySlide(navigation, "carousel__nav-active");
+    displayActiveSlide();
   }
+
+  // go to previous slide function
 
   function prevSlide() {
     if (slidePos === 0) {
@@ -46,45 +119,24 @@ $(document).ready(function () {
     } else {
       slidePos--;
     }
-    displaySlide(slides, "carousel__item-visible");
-    displaySlide(navigation, "carousel__nav-active");
+    displayActiveSlide();
   }
 
-  function slideNavigation() {
-    $('.carousel__item').each(function(slide) {
-      var imgNavigation = document.createElement("img");
-      imgNavigation.classList.add("carousel__nav-img");
-      imgNavigation.setAttribute('src', $(this).find('img').attr('src'));
-      if (slide === slidePos) {
-        imgNavigation.classList.add("carousel__nav-active");
-      }
-      $('.carousel__nav').append(imgNavigation);
-      imgNavigation.addEventListener("click", function () {
-        slidePos = slide;
-        displaySlide(slides, "carousel__item-visible");
-        displaySlide(navigation, "carousel__nav-active");
-      });
-    })
-  }
+  // get and set navigation toggle data
 
-  prevButton.addEventListener("click", prevSlide);
-  nextButton.addEventListener("click", nextSlide);
-
-  $('#saveBtn').on('click', function (e) {
-    checkIsMobile();
-  });
-
-  var toggleNav = function (input, configItem, isCurrent) {
+  function toggleNav(input, configItem, isCurrent) {
     if ($(input).prop("checked") === true) {
-      if (isCurrent) { $('.carousel__nav').addClass('hidden'); }
+      if (isCurrent) { $(globalUI.carouselNav).addClass('hidden'); }
       configItem.hideNav = true;
     } else {
-      if (isCurrent) { $('.carousel__nav').removeClass('hidden'); }
+      if (isCurrent) { $(globalUI.carouselNav).removeClass('hidden'); }
       configItem.hideNav = false;
     }
   }
 
-  var toggleAutoplay = function (input, inputNum, configItem, isCurrent) {
+  // get and set autoplay data
+
+  function toggleAutoplay(input, inputNum, configItem, isCurrent) {
     var autoplayNum = Number($(inputNum).val());
     if (($(input).prop("checked") === true) && autoplayNum) {
       if (isCurrent) {
@@ -105,38 +157,32 @@ $(document).ready(function () {
     }
   }
 
-  $('[popup-open]').on('click', function () {
-    var popup_name = $(this).attr('popup-open');
-    $('[popup-name="' + popup_name + '"]').fadeIn(300);
-    loadSettings();
-  });
+  // load popup settings
 
-  $('[popup-close]').on('click', function () {
-    var popup_name = $(this).attr('popup-close');
-    $('[popup-name="' + popup_name + '"]').fadeOut(300);
-  });
-
-  var loadSettings = function () {
-    $('input[name="toggleNav-mb"]').prop("checked", mbConfig.hideNav);
-    $('input[name="autoplay-mb"]').prop("checked", mbConfig.autoplay);
-    $('input[name="autoplayNum-mb"]').prop("value", mbConfig.time);
-    $('input[name="toggleNav-dt"]').prop("checked", dtConfig.hideNav);
-    $('input[name="autoplay-dt"]').prop("checked", dtConfig.autoplay);
-    $('input[name="autoplayNum-dt"]').prop("value", dtConfig.time);
+  function loadSettings() {
+    $(globalUI.toggleNav_mb).prop("checked", mbConfig.hideNav);
+    $(globalUI.autoplay_mb).prop("checked", mbConfig.autoplay);
+    $(globalUI.autoplayNum_mb).prop("value", mbConfig.time);
+    $(globalUI.toggleNav_dt).prop("checked", dtConfig.hideNav);
+    $(globalUI.autoplay_dt).prop("checked", dtConfig.autoplay);
+    $(globalUI.autoplayNum_dt).prop("value", dtConfig.time);
   }
-  var checkIsMobile = function () {
+
+  // check if current window mobile or desktop
+  // apply user configuration
+
+  function checkIsMobile() {
     if (window.innerWidth < 992) {
-      toggleNav($('input[name="toggleNav-mb"]'), mbConfig, true);
-      toggleNav($('input[name="toggleNav-dt"]'), dtConfig, false);
-      toggleAutoplay($('input[name="autoplay-mb"]'), $('input[name="autoplayNum-mb"]'), mbConfig, true);
-      toggleAutoplay($('input[name="autoplay-dt"]'), $('input[name="autoplayNum-dt"]'), dtConfig, false);
+      toggleNav($(globalUI.toggleNav_mb), mbConfig, true);
+      toggleNav($(globalUI.toggleNav_dt), dtConfig, false);
+      toggleAutoplay($(globalUI.autoplay_mb), $(globalUI.autoplayNum_mb), mbConfig, true);
+      toggleAutoplay($(globalUI.autoplay_dt), $(globalUI.autoplayNum_dt), dtConfig, false);
     } else {
-      toggleNav($('input[name="toggleNav-mb"]'), mbConfig, false);
-      toggleNav($('input[name="toggleNav-dt"]'), dtConfig, true);
-      toggleAutoplay($('input[name="autoplay-dt"]'), $('input[name="autoplayNum-dt"]'), dtConfig, true);
-      toggleAutoplay($('input[name="autoplay-mb"]'), $('input[name="autoplayNum-mb"]'), mbConfig, false);
+      toggleNav($(globalUI.toggleNav_mb), mbConfig, false);
+      toggleNav($(globalUI.toggleNav_dt), dtConfig, true);
+      toggleAutoplay($(globalUI.autoplay_mb), $(globalUI.autoplayNum_mb), mbConfig, false);
+      toggleAutoplay($(globalUI.autoplay_dt), $(globalUI.autoplayNum_dt), dtConfig, true);
     }
   };
-  checkIsMobile();
-  window.onresize = checkIsMobile;
+
 });
