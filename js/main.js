@@ -20,16 +20,21 @@ var globalUI = {
   prevBtn: "#carousel__button-prev",
   nextBtn: "#carousel__button-next"
 };
+
 var mbConfig = {
   autoplay: false,
   hideNav: false,
   time: 0
 };
+
 var dtConfig = {
   autoplay: false,
   hideNav: false,
   time: 0
 };
+
+// global vars
+
 var totalSlides = $(globalUI.carouselItem).length;
 var slidePos = 0;
 var intervalAutoplay = null;
@@ -64,61 +69,75 @@ $(globalUI.buttonSave).on("click", function () {
 // main function, setup carousel and carousel nav
 
 function slideNavigation() {
-  $(globalUI.carouselItem).each(function (slide) {
+
+  $(showMaxSlides(4, $(globalUI.carouselItem).length - 1)).each(function (slide) {
+    var currentNum = this;
     var imgNavigation = document.createElement("img");
     imgNavigation.classList.add("carousel__nav-img");
-    imgNavigation.setAttribute("src", $(this).find("img").attr("src"));
+    imgNavigation.setAttribute("src", $($(globalUI.carouselItem).get(currentNum)).find("img").attr("src"));
+    imgNavigation.setAttribute("id", currentNum);
 
-    if (slide === slidePos) {
-      imgNavigation.classList.add(globalUI.carouselNavActive);
-    }
+    currentNum === slidePos && imgNavigation.classList.add(globalUI.carouselNavActive);
 
     $(globalUI.carouselNav).append(imgNavigation);
-    imgNavigation.addEventListener("click", function () {
-      slidePos = slide;
+
+    $(imgNavigation).click(function () {
+      $(globalUI.carouselNav).empty();
+      slidePos = parseInt($(this).attr("id"));
+      slideNavigation();
       displayActiveSlide();
     });
   });
 }
 
+
 // helper function - sets active carousel and nav item
 
 function displayActiveSlide() {
-  displaySlide(globalUI.carouselItem, globalUI.carouselItemActive);
-  displaySlide(globalUI.carouselNavImg, globalUI.carouselNavActive);
+  displaySlide(globalUI.carouselItem, globalUI.carouselItemActive, false);
+  displaySlide(globalUI.carouselNavImg, globalUI.carouselNavActive, true);
 }
 
 // set active item
 
-function displaySlide(element, className) {
-  $(element).each(function (item) {
-    item === slidePos
-      ? $(this).addClass(className)
-      : $(this).removeClass(className);
-  });
+function displaySlide(element, className, isNav) {
+  if (isNav) {
+    $(element).each(function () {
+      parseInt($(this).attr("id")) === slidePos
+        ? $(this).addClass(className)
+        : $(this).removeClass(className);
+    });
+  } else {
+    $(element).each(function (item) {
+      item === slidePos
+        ? $(this).addClass(className)
+        : $(this).removeClass(className);
+    });
+  }
+
 }
 
 // go to next slide function
 
 function nextSlide() {
-  if (slidePos === totalSlides - 1) {
-    slidePos = 0;
-  } else {
-    slidePos++;
-  }
+  slidePos === totalSlides - 1
+    ? slidePos = 0
+    : slidePos++;
 
+  $(globalUI.carouselNav).empty();
+  slideNavigation();
   displayActiveSlide();
 }
 
 // go to previous slide function
 
 function prevSlide() {
-  if (slidePos === 0) {
-    slidePos = totalSlides - 1;
-  } else {
-    slidePos--;
-  }
+  slidePos === 0
+    ? slidePos = totalSlides - 1
+    : slidePos--;
 
+  $(globalUI.carouselNav).empty();
+  slideNavigation();
   displayActiveSlide();
 }
 
@@ -126,16 +145,13 @@ function prevSlide() {
 
 function toggleNav(input, configItem, isCurrent) {
   if ($(input).prop("checked") === true) {
-    if (isCurrent) {
-      $(globalUI.carouselNav).addClass("hidden");
-    }
 
+    isCurrent && $(globalUI.carouselNav).addClass("hidden");
     configItem.hideNav = true;
-  } else {
-    if (isCurrent) {
-      $(globalUI.carouselNav).removeClass("hidden");
-    }
 
+  } else {
+
+    isCurrent && $(globalUI.carouselNav).removeClass("hidden");
     configItem.hideNav = false;
   }
 }
@@ -256,3 +272,27 @@ function moveTouch(e) {
 
   e.preventDefault();
 };
+
+// function calculates slides in nav
+
+function showMaxSlides(slideNum, maxlength) {
+  var numbers = [];
+  if (slideNum > maxlength) {
+    slideNum = maxlength;
+  } else if (slideNum < 3) {
+    slideNum = 3;
+  }
+  slideNum--;
+  for (var i = slidePos - 1; i < (slidePos + slideNum); i++) {
+    if (i < 0) {
+      numbers.push(maxlength);
+    }
+    else if (i > maxlength) {
+      numbers.push(i - maxlength - 1);
+    } else {
+      numbers.push(i);
+    }
+
+  }
+  return numbers;
+}
