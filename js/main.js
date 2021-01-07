@@ -38,12 +38,23 @@ var dtConfig = {
 var totalSlides = $(globalUI.carouselItem).length;
 var slidePos = 0;
 var intervalAutoplay = null;
+var resizeTimer = null;
 
 // init, apply default config
 
 slideNavigation();
 checkIsMobile();
-window.onresize = checkIsMobile;
+
+$(window).on('resize', function (e) {
+
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function () {
+
+    checkIsMobile();
+
+  }, 250);
+
+});
 
 // setup next, prev btns
 
