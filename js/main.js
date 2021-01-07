@@ -24,14 +24,20 @@ var globalUI = {
 var mbConfig = {
   autoplay: false,
   hideNav: false,
-  time: 0
+  time: 0,
+  fadeIn: false
 };
 
 var dtConfig = {
   autoplay: false,
   hideNav: false,
-  time: 0
+  time: 0,
+  fadeIn: true
 };
+
+/* NOTE:
+ADD SOME CONTENT OR MARGIN FOR FADE-IN FUNCTIONALITY
+*/
 
 // global vars
 
@@ -41,16 +47,16 @@ var intervalAutoplay = null;
 var resizeTimer = null;
 
 // init, apply default config
-
+addFadeIn();
 slideNavigation();
-checkIsMobile();
+runConfig();
 
 $(window).on('resize', function (e) {
 
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(function () {
 
-    checkIsMobile();
+    runConfig();
 
   }, 250);
 
@@ -74,7 +80,7 @@ $(globalUI.popupBtnClose).on("click", function () {
 // setup save btn
 
 $(globalUI.buttonSave).on("click", function () {
-  checkIsMobile();
+  runConfig();
 });
 
 // main function, setup carousel and carousel nav
@@ -207,7 +213,7 @@ function loadSettings() {
 // check if current window mobile or desktop
 // apply user configuration
 
-function checkIsMobile() {
+function runConfig() {
   if (window.innerWidth < 992) {
     toggleNav($(globalUI.toggleNav_mb), mbConfig, true);
     toggleNav($(globalUI.toggleNav_dt), dtConfig, false);
@@ -241,7 +247,17 @@ function checkIsMobile() {
   }
 }
 
-//add swipe gestures
+// add fadeIn only on window load
+
+function addFadeIn() {
+  if (window.innerWidth < 992 && mbConfig.fadeIn || window.innerWidth > 992 && dtConfig.fadeIn) {
+    $(globalUI.carousel).css('opacity', '0');
+    $(globalUI.carouselNav).css('opacity', '0');
+    $(document).scroll(scrollFunction);
+  }
+}
+
+// add swipe gestures
 
 $(globalUI.carousel).on("touchstart", startTouch);
 $(globalUI.carousel).on("touchmove", moveTouch);
@@ -284,7 +300,7 @@ function moveTouch(e) {
   e.preventDefault();
 };
 
-// function calculates slides in nav
+// calculates slides in nav
 
 function showMaxSlides(slideNum, maxlength) {
   var numbers = [];
@@ -307,3 +323,18 @@ function showMaxSlides(slideNum, maxlength) {
   }
   return numbers;
 }
+
+
+// setup scroll handler
+
+function scrollFunction() {
+  var bottom_of_object = $(globalUI.carousel).offset().top + $(globalUI.carousel).outerHeight();
+  var bottom_of_window = $(window).scrollTop() + $(window).height();
+
+  if (bottom_of_window > bottom_of_object) {
+    $(globalUI.carousel).fadeTo("slow", 1)
+    $(globalUI.carouselNav).fadeTo("slow", 1)
+    $(window).off('scroll');
+  }
+}
+
