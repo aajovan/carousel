@@ -32,7 +32,7 @@ var dtConfig = {
   autoplay: false,
   hideNav: false,
   time: 0,
-  fadeIn: true
+  fadeIn: false
 };
 
 /* NOTE:
