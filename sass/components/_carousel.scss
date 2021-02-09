@@ -1,0 +1,49 @@
+.carousel {
+    max-width: 1200px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    z-index: 0;
+
+    &__item {
+        display: none;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        &-visible {
+            display: block;
+            animation: fadedVisibility 0.5s;
+        }
+    }
+
+    &__actions {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+
+        button {
+            height: 40px;
+            width: 40px;
+            border-radius: 25px;
+            font-size: 20px;
+            border: 2px solid $color-white;
+            background-color: $color-primary;
+            color: $color-white;
+            transition: all 0.5s;
+            &:hover {
+                background-color: $color-tertiary;
+                cursor: pointer;
+            }
+        }
+    }
+}
+

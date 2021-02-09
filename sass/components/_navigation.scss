@@ -1,0 +1,31 @@
+.carousel__nav {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    max-width: 1200px;
+
+    &-img {
+        width: 10px;
+        flex: 1;
+        opacity: 0.7;
+
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            min-height: 150px;
+        }
+
+        &:hover {
+            cursor: pointer;
+            opacity: 0.9;
+        }
+    }
+    &-active {
+        opacity: 1;
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+.hidden {
+    display: none;
+}

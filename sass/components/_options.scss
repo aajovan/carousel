@@ -1,0 +1,36 @@
+.carousel__options {
+    &__box {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 5px;
+        min-height: 34px;
+    }
+    &__header {
+        box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.2);
+        color: $color-primary;
+        padding: 15px;
+    }
+    &__container {
+        padding: 10px;
+        input[type="number"] {
+            border: 1px solid $color-grey-light-1;
+            border-radius: 50px;
+            max-width: 100px;
+            text-align: center;
+        }
+    }
+    &-save {
+        background-color: $color-primary;
+        border-radius: 50px;
+        color: $color-white;
+        font-size: 19px;
+        line-height: 21px;
+        padding: 5px 15px;
+        text-decoration: none;
+        &:hover {
+            background-color: $color-tertiary;
+            cursor: pointer;
+        }
+    }
+}

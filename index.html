@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Zadatak 3</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="popup" id="popup">
+            <div class="popup__content">
+                <div class="carousel__options__header">
+                    <h1>Postavke</h1>
+                </div>
+                <div class="carousel__options__container">
+                    <h2>Desktop</h2>
+                    <div class="carousel__options__box">
+                        <label for="autoplay-dt">Autoplay</label>
+                        <input type="checkbox" id="autoplay-dt" name="autoplay-dt" value="false" class="switch" />
+                    </div>
+                    <div class="carousel__options__box">
+                        <input type="number" id="autoplayNum-dt" name="autoplayNum-dt" min="1" placeholder="2000ms" />
+                    </div>
+                    <div class="carousel__options__box">
+                        <label for="toggleNav-dt">Sakrij navigaciju</label>
+                        <input type="checkbox" id="toggleNav-dt" name="toggleNav-dt" value="false" class="switch" />
+                    </div>
+                </div>
+                <div class="carousel__options__container">
+                    <h2>Mobile</h2>
+                    <div class="carousel__options__box">
+                        <label for="autoplay-mb">Autoplay</label>
+                        <input type="checkbox" id="autoplay-mb" name="autoplay-mb" value="false" class="switch">
+                    </div>
+                    <div class="carousel__options__box">
+                        <input type="number" id="autoplayNum-mb" name="autoplayNum-mb" min="1" placeholder="2000ms" />
+                    </div>
+                    <div class="carousel__options__box">
+                        <label for="toggleNav-mb">Sakrij navigaciju</label>
+                        <input type="checkbox" id="toggleNav-mb" name="toggleNav-mb" value="false" class="switch">
+                    </div>
+                </div>
+                <div class="carousel__options__container">
+                    <div class="carousel__options__box">
+                        <a class="carousel__options-save" id="saveBtn" href="javascript:void(0)">Spremi</a>
+                    </div>
+                </div>
+                <a class="popup__btn-close" href="javascript:void(0)">x</a>
+            </div>
+        </div>
+        <div class="carousel">
+            <a class="popup__btn-open" href="javascript:void(0)"><img src="img/settings.svg" alt=""></a>
+            <div class="carousel__item carousel__item-visible">
+                <img src="img/slides/1.jpg" alt="">
+            </div>
+            <div class="carousel__item">
+                <img src="img/slides/2.jpg" alt="">
+            </div>
+            <div class="carousel__item">
+                <img src="img/slides/3.jpg" alt="">
+            </div>
+            <div class="carousel__item">
+                <img src="img/slides/4.jpg" alt="">
+            </div>
+            <div class="carousel__item">
+                <img src="img/slides/5.jpg" alt="">
+            </div>
+            <div class="carousel__item">
+                <img src="img/slides/6.jpg" alt="">
+            </div>
+            <div class="carousel__item">
+                <img src="img/slides/7.jpg" alt="">
+            </div>
+            <div class="carousel__item">
+                <img src="img/slides/8.jpg" alt="">
+            </div>
+            <div class="carousel__actions">
+                <button id="carousel__button-prev" aria-label="Previous slide">&#8249;</button>
+                <button id="carousel__button-next" aria-label="Previous slide">&#8250;</button>
+            </div>
+        </div>
+        <div class="carousel__nav" id="carousel__nav"></div>
+    </div>
+
+    <script type='text/javascript' src='js/main.js'></script>
+</body>
+
+</html>
