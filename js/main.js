@@ -4,19 +4,19 @@ var globalUI = {
   popup: "#popup",
   popupBtnOpen: ".popup__btn-open",
   popupBtnClose: ".popup__btn-close",
-  toggleNav_mb: 'input[name="toggleNav-mb"]',
-  toggleNav_dt: 'input[name="toggleNav-dt"]',
+  toggleNav_mb: 'input[name="toggle-nav-mb"]',
+  toggleNav_dt: 'input[name="toggle-nav-dt"]',
   autoplay_mb: 'input[name="autoplay-mb"]',
   autoplay_dt: 'input[name="autoplay-dt"]',
-  autoplayNum_mb: 'input[name="autoplayNum-mb"]',
-  autoplayNum_dt: 'input[name="autoplayNum-dt"]',
+  autoplayNum_mb: 'input[name="autoplay-num-mb"]',
+  autoplayNum_dt: 'input[name="autoplay-num-dt"]',
   carousel: '.carousel',
   carouselNav: ".carousel__nav",
+  carouselNavItem: "carousel__nav__item",
+  carouselNavItemActive: "carousel__nav__item--active",
   carouselItem: ".carousel__item",
-  carouselNavImg: ".carousel__nav-img",
-  carouselNavActive: "carousel__nav-active",
-  carouselItemActive: "carousel__item-visible",
-  buttonSave: "#saveBtn",
+  carouselItemActive: "carousel__item--visible",
+  buttonSave: "#save-btn",
   prevBtn: "#carousel__button-prev",
   nextBtn: "#carousel__button-next"
 };
@@ -47,12 +47,12 @@ var intervalAutoplay = null;
 var resizeTimer = null;
 
 // init, apply default config
+
 addFadeIn();
 slideNavigation();
 runConfig();
 
 $(window).on('resize', function (e) {
-
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(function () {
 
@@ -90,11 +90,11 @@ function slideNavigation() {
   $(showMaxSlides(4, $(globalUI.carouselItem).length - 1)).each(function (slide) {
     var currentNum = this;
     var imgNavigation = document.createElement("img");
-    imgNavigation.classList.add("carousel__nav-img");
+    imgNavigation.classList.add(globalUI.carouselNavItem);
     imgNavigation.setAttribute("src", $($(globalUI.carouselItem).get(currentNum)).find("img").attr("src"));
     imgNavigation.setAttribute("id", currentNum);
 
-    currentNum === slidePos && imgNavigation.classList.add(globalUI.carouselNavActive);
+    currentNum === slidePos && imgNavigation.classList.add(globalUI.carouselNavItemActive);
 
     $(globalUI.carouselNav).append(imgNavigation);
 

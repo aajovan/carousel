@@ -13,9 +13,9 @@
             height: auto;
         }
 
-        &-visible {
+        &--visible {
             display: block;
-            animation: fadedVisibility 0.5s;
+            animation: fade-in 0.5s;
         }
     }
 
@@ -39,6 +39,7 @@
             background-color: $color-primary;
             color: $color-white;
             transition: all 0.5s;
+
             &:hover {
                 background-color: $color-tertiary;
                 cursor: pointer;

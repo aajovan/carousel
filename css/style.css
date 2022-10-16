@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400&display=swap");
-@keyframes fadedVisibility {
+@keyframes fade-in {
   0% {
     opacity: 0; }
   100% {
@@ -25,6 +25,9 @@ body {
 body {
   font-size: 2rem;
   font-family: 'Lato', sans-serif; }
+
+.hidden {
+  display: none !important; }
 
 .container {
   display: flex;
@@ -78,9 +81,9 @@ label {
     .carousel__item img {
       width: 100%;
       height: auto; }
-    .carousel__item-visible {
+    .carousel__item--visible {
       display: block;
-      animation: fadedVisibility 0.5s; }
+      animation: fade-in 0.5s; }
   .carousel__actions {
     position: absolute;
     top: 0;
@@ -124,7 +127,7 @@ label {
     max-width: 100px;
     text-align: center; }
 
-.carousel__options-save {
+.carousel__options__save {
   background-color: #23274a;
   border-radius: 50px;
   color: #fff;
@@ -132,7 +135,7 @@ label {
   line-height: 21px;
   padding: 5px 15px;
   text-decoration: none; }
-  .carousel__options-save:hover {
+  .carousel__options__save:hover {
     background-color: #383b59;
     cursor: pointer; }
 
@@ -141,23 +144,20 @@ label {
   display: flex;
   flex-direction: row;
   max-width: 1200px; }
-  .carousel__nav-img {
+  .carousel__nav__item {
     width: 10px;
     flex: 1;
     opacity: 0.7; }
     @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
-      .carousel__nav-img {
+      .carousel__nav__item {
         min-height: 150px; } }
-    .carousel__nav-img:hover {
+    .carousel__nav__item:hover {
       cursor: pointer;
       opacity: 0.9; }
-  .carousel__nav-active {
-    opacity: 1; }
-    .carousel__nav-active:hover {
+    .carousel__nav__item--active {
       opacity: 1; }
-
-.hidden {
-  display: none; }
+      .carousel__nav__item--active:hover {
+        opacity: 1; }
 
 .popup {
   background: rgba(0, 0, 0, 0.75);
