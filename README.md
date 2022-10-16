@@ -9,3 +9,7 @@
 * simple carousel with mobile and desktop config
 * JQuery + Sass
 * Compile css on file save
+
+## How to run?
+
+* simply open index.html (recompile css based on code changes)
